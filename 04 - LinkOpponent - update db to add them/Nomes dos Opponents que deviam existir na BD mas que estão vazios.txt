@@ -1,0 +1,44 @@
+"PlayerName que tinham "Opponent" coo sring vazia
+
+db.atp.find({"Opponent":""})
+
+
+PlayerName: "Michel Redlicki" (W)
+Opponent: Elio Jose Ribeiro Lago
+https://www.atptour.com/en/players/elio-jose-ribeiro-lago/j540/overview
+
+
+PlayerName: "Ervand Gasparyan" (W)
+Opponent: Botir Sapaev
+
+PlayerName: "Azizbek Lukmanov" (L)
+Opponent: Botir Sapaev
+
+https://www.google.com/search?q=Botir+Sapaev           (aparece resultados para o jogador, conseguimos obter Country e Hand)
+https://www.atptour.com/en/players/xxxxxx-sapaev/sm27/overview    (até se encontra um resultado para o site do atptour
+																	mas este link no site da atptour não tem qualquer info)
+
+https://www.itftennis.com/en/players/botir-sapaev/800369780/uzb/mt/s/   (por isso vamos usar esta página, com o id 800369780)
+
+
+PlayerName: "Francisco Rodriguez" (W)
+Opponent: Jesse Smatt                         ( a mesma coisa para este caramelo)
+https://www.itftennis.com/en/players/jesse-smatt/800197779/jam/jt/s/
+
+
+
+PlayerName: "Josip Dumanic" (W)
+Opponent: Kreso Zrinski
+https://www.atptour.com/en/players/kreso-zrinski/z140/overview
+
+
+
+PlayerName: "Alexandru Vasile Manole" (W)
+Opponent: Robert Damin Savin
+https://www.atptour.com/en/players/robert-savin/s0k4/overview
+
+
+PlayerName: "Filipe Derdoy" (W)
+Opponent: Vicente Manuel Rivas Maturana
+https://www.atptour.com/en/players/vicente-rivas-maturana/r0de/overview
+
