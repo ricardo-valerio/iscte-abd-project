@@ -1,0 +1,98 @@
+Antigua
+Antilles, Netherlands
+Bolivia
+Bosnia-Herzegovina
+Brunei
+Chinese Taipei
+Congo, Dem. Rep. (Zaire)
+Curacao
+Czechia
+Great Britain
+Iran
+Ivory Coast
+Moldova
+North Macedonia
+Serbia & Montenegro
+Singapore - OLD
+Slovak Republic
+South Korea
+Syria
+Tanzania
+Turkiye
+Venezuela
+Vietnam
+Yugoslavia
+null   <--------- importante tratar destes casos (pois houve registos com null que tinham o país no birthplace)
+
+
+
+
+
+
+
+/*
+     País	                       Código
+1 - Antigua	                       AG
+2 - Antilles, Netherlands	         AN (descontinuado) por isso iremos colocar NL (Netherlands)
+3 - Bolivia	                       BO
+4 - Bosnia-Herzegovina	           BA
+5 - Brunei	                       BN
+6 - Chinese Taipei (Taiwan)	       TW
+7 - Congo, Dem. Rep. (Zaire)	     CD
+8 - Curacao                        CW
+9 - Czechia	                       CZ
+10 - Great Britain (Reino Unido)	 GB
+11 - Iran	                         IR
+12 - Ivory Coast (Côte dIvoire)	   CI
+13 - Moldova	                     MD
+14 - North Macedonia	             MK
+15 - Serbia & Montenegro           RS
+16 - Singapore - OLD	             SG
+17 - Slovak Republic (Eslováquia)  SK
+18 - South Korea (Coreia do Sul)	 KR
+19 - Syria	                       SY
+20 - Tanzania                      TZ
+21 - Turkiye (Turquia)	           TR
+22 - Venezuela	                   VE
+23 - Vietnam	                     VN
+24 - Yugoslavia	                   YU (descontinuado) iremos ter de pesquisar no google sobre os jogadores
+
+null   <--------- importante tratar destes casos (pois houve registos com null que tinham o país no birthplace)
+
+*/
+
+
+// 26 ---------------------------
+
+db.atpplayers.find(
+
+  {
+    "Born": null,
+    "BornCountryCode": null
+  },
+  {
+    _id: 0,
+    PlayerName: 1,
+    Born: 1,
+    BornCountryCode: 1
+  }
+
+).count()
+
+
+db.atpplayers.updateMany(
+  // filter
+  {
+    "Born": null,
+    "BornCountryCode": null
+  },
+
+  // set command
+    { "$set":
+      {
+        "BornCountryCode": "RS"
+      }
+    }
+)
+
+// ----------------

@@ -1,0 +1,20 @@
+
+* Dão Erro:
+
+* https://www.atptour.com/en/players/alex-bogomolov-jr./b842/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/dean-yimoyines-jr./y116/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/jan-kodes-jr./k234/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/juan-pablo-boada-g./bi67/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/sun-yong-kim-jr./k675/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/witold-%22victor%22-cudny/c612/player-activity?year=all&matchType=Singles
+
+
+
+* Links Corrigidos:
+
+* https://www.atptour.com/en/players/alex-bogomolov-jr/b842/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/dean-yimoyines-jr/y116/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/jan-kodes-jr/k234/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/juan-pablo-boada-g/bi67/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/sun-yong-kim-jr/k675/player-activity?year=all&matchType=Singles
+* https://www.atptour.com/en/players/witold-victor-cudny/c612/player-activity?year=all&matchType=Singles
