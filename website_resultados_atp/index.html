@@ -1,0 +1,1943 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head><script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Pricing example · Bootstrap v5.3</title>
+
+  <link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/sc-2.4.3/sp-2.3.3/datatables.min.css" rel="stylesheet">
+  <!--
+  <script src="https://cdn.datatables.net/v/bs5/dt-2.1.8/sc-2.4.3/sp-2.3.3/datatables.min.js"></script>
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<style>
+.fi{
+  border: 1px solid #000;
+}
+</style>
+
+
+</head>
+<body>
+
+
+  <div class="container py-3">
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center">
+        <p class="mt-2 d-flex align-items-center link-body-emphasis text-decoration-none">
+          <img src="./imagens/iscte-logo.png" alt="Instituto Universitário de Lisboa" width="250">
+          <span class="fs-4">Ciência de Dados - Armazenamento para Big Data</span>
+        </p>
+
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav nav-pills">
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link active" aria-current="page" href="#">Alínea 1)</a>
+          </li>
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link" href="./alinea_2.html">Alínea 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link" href="./alinea_3.html">Alínea 3)</a>
+          </li>
+          <li class="nav-item">
+            <a class="py-2 nav-link" href="./alinea_4.html">Alínea 4)</a>
+          </li>
+        </nav>
+      </div>
+
+      <h3 class="text-body-emphasis text-center">Alínea 1)</h3>
+
+      <div class="accordion mb-5" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Goal:
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p class="fs-5 text-body-secondary">For each country:</p>
+                <ol>
+                  <li>Number of Players</li>
+                  <li>Number of Tournaments</li>
+                  <li>Number of Games</li>
+                </ol>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              SQL command:
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <pre><code class="language-sql">
+                SELECT
+                    country.country AS country_name,
+                    (SELECT COUNT(*)
+                     FROM player
+                     WHERE player.born_country_code = country.country_code) AS TotalPlayers,
+                    (SELECT COUNT(*)
+                     FROM tournament
+                     WHERE tournament.location_country_code = country.country_code) AS TotalTournaments,
+                    (SELECT COUNT(*)
+                     FROM match
+                     JOIN tournament ON match.tournament_id = tournament.id
+                     WHERE tournament.location_country_code = country.country_code) AS TotalGames
+                FROM
+                    country;
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </header>
+
+    <main>
+      <div class="container">
+        <table id="example" class="table table-sm table-striped table-hover text-center">
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th style="width:30%">Country</th>
+              <th>Total Players</th>
+              <th>Total Tournaments</th>
+              <th>Total Games</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="fi fi-af" title="country code: AF"></span></td>
+              <td>Afghanistan</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ax" title="country code: AX"></span></td>
+              <td>Åland Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-al" title="country code: AL"></span></td>
+              <td>Albania</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-dz" title="country code: DZ"></span></td>
+              <td>Algeria</td>
+              <td>68</td>
+              <td>35</td>
+              <td>914</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-as" title="country code: AS"></span></td>
+              <td>American Samoa</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ad" title="country code: AD"></span></td>
+              <td>Andorra</td>
+              <td>7</td>
+              <td>13</td>
+              <td>349</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ao" title="country code: AO"></span></td>
+              <td>Angola</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ai" title="country code: AI"></span></td>
+              <td>Anguilla</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-aq" title="country code: AQ"></span></td>
+              <td>Antarctica</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ag" title="country code: AG"></span></td>
+              <td>Antigua and Barbuda</td>
+              <td>3</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ar" title="country code: AR"></span></td>
+              <td>Argentina</td>
+              <td>789</td>
+              <td>438</td>
+              <td>12359</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-am" title="country code: AM"></span></td>
+              <td>Armenia</td>
+              <td>25</td>
+              <td>7</td>
+              <td>216</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-aw" title="country code: AW"></span></td>
+              <td>Aruba</td>
+              <td>8</td>
+              <td>4</td>
+              <td>124</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-au" title="country code: AU"></span></td>
+              <td>Australia</td>
+              <td>830</td>
+              <td>579</td>
+              <td>21383</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-at" title="country code: AT"></span></td>
+              <td>Austria</td>
+              <td>310</td>
+              <td>359</td>
+              <td>10483</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-az" title="country code: AZ"></span></td>
+              <td>Azerbaijan</td>
+              <td>13</td>
+              <td>9</td>
+              <td>277</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bs" title="country code: BS"></span></td>
+              <td>Bahamas</td>
+              <td>22</td>
+              <td>20</td>
+              <td>114</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bh" title="country code: BH"></span></td>
+              <td>Bahrain</td>
+              <td>14</td>
+              <td>12</td>
+              <td>362</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bd" title="country code: BD"></span></td>
+              <td>Bangladesh</td>
+              <td>6</td>
+              <td>2</td>
+              <td>62</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bb" title="country code: BB"></span></td>
+              <td>Barbados</td>
+              <td>13</td>
+              <td>16</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-by" title="country code: BY"></span></td>
+              <td>Belarus</td>
+              <td>85</td>
+              <td>68</td>
+              <td>1339</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-be" title="country code: BE"></span></td>
+              <td>Belgium</td>
+              <td>232</td>
+              <td>230</td>
+              <td>5989</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bz" title="country code: BZ"></span></td>
+              <td>Belize</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bj" title="country code: BJ"></span></td>
+              <td>Benin</td>
+              <td>21</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bm" title="country code: BM"></span></td>
+              <td>Bermuda</td>
+              <td>5</td>
+              <td>17</td>
+              <td>483</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bt" title="country code: BT"></span></td>
+              <td>Bhutan</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bo" title="country code: BO"></span></td>
+              <td>Bolivia, Plurinational State of</td>
+              <td>100</td>
+              <td>84</td>
+              <td>2354</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bq" title="country code: BQ"></span></td>
+              <td>Bonaire, Sint Eustatius and Saba</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ba" title="country code: BA"></span></td>
+              <td>Bosnia and Herzegovina</td>
+              <td>65</td>
+              <td>119</td>
+              <td>3710</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bw" title="country code: BW"></span></td>
+              <td>Botswana</td>
+              <td>13</td>
+              <td>3</td>
+              <td>93</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bv" title="country code: BV"></span></td>
+              <td>Bouvet Island</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-br" title="country code: BR"></span></td>
+              <td>Brazil</td>
+              <td>1005</td>
+              <td>706</td>
+              <td>21971</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-io" title="country code: IO"></span></td>
+              <td>British Indian Ocean Territory</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bn" title="country code: BN"></span></td>
+              <td>Brunei Darussalam</td>
+              <td>9</td>
+              <td>2</td>
+              <td>58</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bg" title="country code: BG"></span></td>
+              <td>Bulgaria</td>
+              <td>131</td>
+              <td>101</td>
+              <td>2661</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bf" title="country code: BF"></span></td>
+              <td>Burkina Faso</td>
+              <td>6</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bi" title="country code: BI"></span></td>
+              <td>Burundi</td>
+              <td>9</td>
+              <td>6</td>
+              <td>181</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kh" title="country code: KH"></span></td>
+              <td>Cambodia</td>
+              <td>5</td>
+              <td>14</td>
+              <td>434</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cm" title="country code: CM"></span></td>
+              <td>Cameroon</td>
+              <td>11</td>
+              <td>3</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ca" title="country code: CA"></span></td>
+              <td>Canada</td>
+              <td>305</td>
+              <td>289</td>
+              <td>9543</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cv" title="country code: CV"></span></td>
+              <td>Cape Verde</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ky" title="country code: KY"></span></td>
+              <td>Cayman Islands</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cf" title="country code: CF"></span></td>
+              <td>Central African Republic</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-td" title="country code: TD"></span></td>
+              <td>Chad</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cl" title="country code: CL"></span></td>
+              <td>Chile</td>
+              <td>300</td>
+              <td>278</td>
+              <td>7869</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cn" title="country code: CN"></span></td>
+              <td>China</td>
+              <td>330</td>
+              <td>394</td>
+              <td>13277</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cx" title="country code: CX"></span></td>
+              <td>Christmas Island</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cc" title="country code: CC"></span></td>
+              <td>Cocos (Keeling) Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-co" title="country code: CO"></span></td>
+              <td>Colombia</td>
+              <td>294</td>
+              <td>235</td>
+              <td>7412</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-km" title="country code: KM"></span></td>
+              <td>Comoros</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cg" title="country code: CG"></span></td>
+              <td>Congo</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cd" title="country code: CD"></span></td>
+              <td>Congo, the Democratic Republic of the</td>
+              <td>5</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ck" title="country code: CK"></span></td>
+              <td>Cook Islands</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cr" title="country code: CR"></span></td>
+              <td>Costa Rica</td>
+              <td>20</td>
+              <td>17</td>
+              <td>341</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ci" title="country code: CI"></span></td>
+              <td>Côte d&#39;Ivoire</td>
+              <td>20</td>
+              <td>7</td>
+              <td>136</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-hr" title="country code: HR"></span></td>
+              <td>Croatia</td>
+              <td>282</td>
+              <td>290</td>
+              <td>8881</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cu" title="country code: CU"></span></td>
+              <td>Cuba</td>
+              <td>33</td>
+              <td>20</td>
+              <td>320</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cw" title="country code: CW"></span></td>
+              <td>Curaçao</td>
+              <td>2</td>
+              <td>4</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cy" title="country code: CY"></span></td>
+              <td>Cyprus</td>
+              <td>38</td>
+              <td>29</td>
+              <td>567</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-cz" title="country code: CZ"></span></td>
+              <td>Czech Republic</td>
+              <td>407</td>
+              <td>308</td>
+              <td>9571</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-dk" title="country code: DK"></span></td>
+              <td>Denmark</td>
+              <td>95</td>
+              <td>81</td>
+              <td>1334</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-dj" title="country code: DJ"></span></td>
+              <td>Djibouti</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-dm" title="country code: DM"></span></td>
+              <td>Dominica</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-do" title="country code: DO"></span></td>
+              <td>Dominican Republic</td>
+              <td>53</td>
+              <td>75</td>
+              <td>1762</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ec" title="country code: EC"></span></td>
+              <td>Ecuador</td>
+              <td>208</td>
+              <td>183</td>
+              <td>5202</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-eg" title="country code: EG"></span></td>
+              <td>Egypt</td>
+              <td>115</td>
+              <td>398</td>
+              <td>11595</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sv" title="country code: SV"></span></td>
+              <td>El Salvador</td>
+              <td>24</td>
+              <td>35</td>
+              <td>669</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gq" title="country code: GQ"></span></td>
+              <td>Equatorial Guinea</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-er" title="country code: ER"></span></td>
+              <td>Eritrea</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ee" title="country code: EE"></span></td>
+              <td>Estonia</td>
+              <td>52</td>
+              <td>54</td>
+              <td>1374</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sz" title="country code: SZ"></span></td>
+              <td>Eswatini</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-et" title="country code: ET"></span></td>
+              <td>Ethiopia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fk" title="country code: FK"></span></td>
+              <td>Falkland Islands (Malvinas)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fo" title="country code: FO"></span></td>
+              <td>Faroe Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fj" title="country code: FJ"></span></td>
+              <td>Fiji</td>
+              <td>0</td>
+              <td>1</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fi" title="country code: FI"></span></td>
+              <td>Finland</td>
+              <td>145</td>
+              <td>157</td>
+              <td>4343</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fr" title="country code: FR"></span></td>
+              <td>France</td>
+              <td>1048</td>
+              <td>1097</td>
+              <td>40235</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gf" title="country code: GF"></span></td>
+              <td>French Guiana</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pf" title="country code: PF"></span></td>
+              <td>French Polynesia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tf" title="country code: TF"></span></td>
+              <td>French Southern Territories</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ga" title="country code: GA"></span></td>
+              <td>Gabon</td>
+              <td>9</td>
+              <td>10</td>
+              <td>306</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gm" title="country code: GM"></span></td>
+              <td>Gambia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ge" title="country code: GE"></span></td>
+              <td>Georgia</td>
+              <td>56</td>
+              <td>49</td>
+              <td>1319</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-de" title="country code: DE"></span></td>
+              <td>Germany</td>
+              <td>1109</td>
+              <td>1081</td>
+              <td>34063</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gh" title="country code: GH"></span></td>
+              <td>Ghana</td>
+              <td>33</td>
+              <td>11</td>
+              <td>205</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gi" title="country code: GI"></span></td>
+              <td>Gibraltar</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gr" title="country code: GR"></span></td>
+              <td>Greece</td>
+              <td>149</td>
+              <td>207</td>
+              <td>6046</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gl" title="country code: GL"></span></td>
+              <td>Greenland</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gd" title="country code: GD"></span></td>
+              <td>Grenada</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gp" title="country code: GP"></span></td>
+              <td>Guadeloupe</td>
+              <td>2</td>
+              <td>11</td>
+              <td>397</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gu" title="country code: GU"></span></td>
+              <td>Guam</td>
+              <td>9</td>
+              <td>12</td>
+              <td>337</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gt" title="country code: GT"></span></td>
+              <td>Guatemala</td>
+              <td>40</td>
+              <td>30</td>
+              <td>516</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gg" title="country code: GG"></span></td>
+              <td>Guernsey</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gn" title="country code: GN"></span></td>
+              <td>Guinea</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gw" title="country code: GW"></span></td>
+              <td>Guinea-Bissau</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gy" title="country code: GY"></span></td>
+              <td>Guyana</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ht" title="country code: HT"></span></td>
+              <td>Haiti</td>
+              <td>10</td>
+              <td>4</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-hm" title="country code: HM"></span></td>
+              <td>Heard Island and McDonald Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-va" title="country code: VA"></span></td>
+              <td>Holy See (Vatican City State)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-hn" title="country code: HN"></span></td>
+              <td>Honduras</td>
+              <td>5</td>
+              <td>1</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-hk" title="country code: HK"></span></td>
+              <td>Hong Kong</td>
+              <td>59</td>
+              <td>85</td>
+              <td>1873</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-hu" title="country code: HU"></span></td>
+              <td>Hungary</td>
+              <td>127</td>
+              <td>148</td>
+              <td>3731</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-is" title="country code: IS"></span></td>
+              <td>Iceland</td>
+              <td>4</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-in" title="country code: IN"></span></td>
+              <td>India</td>
+              <td>440</td>
+              <td>410</td>
+              <td>14505</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-id" title="country code: ID"></span></td>
+              <td>Indonesia</td>
+              <td>99</td>
+              <td>114</td>
+              <td>2616</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ir" title="country code: IR"></span></td>
+              <td>Iran, Islamic Republic of</td>
+              <td>78</td>
+              <td>81</td>
+              <td>2174</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-iq" title="country code: IQ"></span></td>
+              <td>Iraq</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ie" title="country code: IE"></span></td>
+              <td>Ireland</td>
+              <td>66</td>
+              <td>54</td>
+              <td>1116</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-im" title="country code: IM"></span></td>
+              <td>Isle of Man</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-il" title="country code: IL"></span></td>
+              <td>Israel</td>
+              <td>223</td>
+              <td>234</td>
+              <td>6261</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-it" title="country code: IT"></span></td>
+              <td>Italy</td>
+              <td>1218</td>
+              <td>1358</td>
+              <td>46589</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-jm" title="country code: JM"></span></td>
+              <td>Jamaica</td>
+              <td>35</td>
+              <td>54</td>
+              <td>1318</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-jp" title="country code: JP"></span></td>
+              <td>Japan</td>
+              <td>475</td>
+              <td>378</td>
+              <td>11297</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-je" title="country code: JE"></span></td>
+              <td>Jersey</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-jo" title="country code: JO"></span></td>
+              <td>Jordan</td>
+              <td>8</td>
+              <td>2</td>
+              <td>62</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kz" title="country code: KZ"></span></td>
+              <td>Kazakhstan</td>
+              <td>97</td>
+              <td>163</td>
+              <td>5036</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ke" title="country code: KE"></span></td>
+              <td>Kenya</td>
+              <td>26</td>
+              <td>15</td>
+              <td>362</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ki" title="country code: KI"></span></td>
+              <td>Kiribati</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kp" title="country code: KP"></span></td>
+              <td>Korea, Democratic People&#39;s Republic of</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kr" title="country code: KR"></span></td>
+              <td>Korea, Republic of</td>
+              <td>290</td>
+              <td>198</td>
+              <td>6046</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kw" title="country code: KW"></span></td>
+              <td>Kuwait</td>
+              <td>51</td>
+              <td>64</td>
+              <td>1601</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kg" title="country code: KG"></span></td>
+              <td>Kyrgyzstan</td>
+              <td>4</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-la" title="country code: LA"></span></td>
+              <td>Lao People&#39;s Democratic Republic</td>
+              <td>3</td>
+              <td>2</td>
+              <td>61</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lv" title="country code: LV"></span></td>
+              <td>Latvia</td>
+              <td>41</td>
+              <td>41</td>
+              <td>725</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lb" title="country code: LB"></span></td>
+              <td>Lebanon</td>
+              <td>32</td>
+              <td>26</td>
+              <td>366</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ls" title="country code: LS"></span></td>
+              <td>Lesotho</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lr" title="country code: LR"></span></td>
+              <td>Liberia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ly" title="country code: LY"></span></td>
+              <td>Libya</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-li" title="country code: LI"></span></td>
+              <td>Liechtenstein</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lt" title="country code: LT"></span></td>
+              <td>Lithuania</td>
+              <td>47</td>
+              <td>41</td>
+              <td>944</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lu" title="country code: LU"></span></td>
+              <td>Luxembourg</td>
+              <td>28</td>
+              <td>31</td>
+              <td>419</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mo" title="country code: MO"></span></td>
+              <td>Macao</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mk" title="country code: MK"></span></td>
+              <td>Macedonia, the Former Yugoslav Republic of</td>
+              <td>31</td>
+              <td>30</td>
+              <td>793</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mg" title="country code: MG"></span></td>
+              <td>Madagascar</td>
+              <td>8</td>
+              <td>1</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mw" title="country code: MW"></span></td>
+              <td>Malawi</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-my" title="country code: MY"></span></td>
+              <td>Malaysia</td>
+              <td>39</td>
+              <td>42</td>
+              <td>1232</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mv" title="country code: MV"></span></td>
+              <td>Maldives</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ml" title="country code: ML"></span></td>
+              <td>Mali</td>
+              <td>5</td>
+              <td>4</td>
+              <td>124</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mt" title="country code: MT"></span></td>
+              <td>Malta</td>
+              <td>9</td>
+              <td>3</td>
+              <td>93</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mh" title="country code: MH"></span></td>
+              <td>Marshall Islands</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mq" title="country code: MQ"></span></td>
+              <td>Martinique</td>
+              <td>0</td>
+              <td>4</td>
+              <td>119</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mr" title="country code: MR"></span></td>
+              <td>Mauritania</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mu" title="country code: MU"></span></td>
+              <td>Mauritius</td>
+              <td>4</td>
+              <td>1</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-yt" title="country code: YT"></span></td>
+              <td>Mayotte</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mx" title="country code: MX"></span></td>
+              <td>Mexico</td>
+              <td>508</td>
+              <td>543</td>
+              <td>16470</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-fm" title="country code: FM"></span></td>
+              <td>Micronesia, Federated States of</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-md" title="country code: MD"></span></td>
+              <td>Moldova, Republic of</td>
+              <td>26</td>
+              <td>6</td>
+              <td>23</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mc" title="country code: MC"></span></td>
+              <td>Monaco</td>
+              <td>19</td>
+              <td>62</td>
+              <td>2544</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mn" title="country code: MN"></span></td>
+              <td>Mongolia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-me" title="country code: ME"></span></td>
+              <td>Montenegro</td>
+              <td>12</td>
+              <td>6</td>
+              <td>186</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ms" title="country code: MS"></span></td>
+              <td>Montserrat</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ma" title="country code: MA"></span></td>
+              <td>Morocco</td>
+              <td>160</td>
+              <td>230</td>
+              <td>7232</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mz" title="country code: MZ"></span></td>
+              <td>Mozambique</td>
+              <td>10</td>
+              <td>8</td>
+              <td>242</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mm" title="country code: MM"></span></td>
+              <td>Myanmar</td>
+              <td>0</td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-na" title="country code: NA"></span></td>
+              <td>Namibia</td>
+              <td>15</td>
+              <td>4</td>
+              <td>124</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nr" title="country code: NR"></span></td>
+              <td>Nauru</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-np" title="country code: NP"></span></td>
+              <td>Nepal</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nl" title="country code: NL"></span></td>
+              <td>Netherlands</td>
+              <td>327</td>
+              <td>312</td>
+              <td>8910</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nc" title="country code: NC"></span></td>
+              <td>New Caledonia</td>
+              <td>5</td>
+              <td>18</td>
+              <td>669</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nz" title="country code: NZ"></span></td>
+              <td>New Zealand</td>
+              <td>101</td>
+              <td>126</td>
+              <td>2790</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ni" title="country code: NI"></span></td>
+              <td>Nicaragua</td>
+              <td>5</td>
+              <td>3</td>
+              <td>93</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ne" title="country code: NE"></span></td>
+              <td>Niger</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ng" title="country code: NG"></span></td>
+              <td>Nigeria</td>
+              <td>117</td>
+              <td>108</td>
+              <td>2757</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nu" title="country code: NU"></span></td>
+              <td>Niue</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-nf" title="country code: NF"></span></td>
+              <td>Norfolk Island</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mp" title="country code: MP"></span></td>
+              <td>Northern Mariana Islands</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-no" title="country code: NO"></span></td>
+              <td>Norway</td>
+              <td>75</td>
+              <td>61</td>
+              <td>1110</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-om" title="country code: OM"></span></td>
+              <td>Oman</td>
+              <td>3</td>
+              <td>3</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pk" title="country code: PK"></span></td>
+              <td>Pakistan</td>
+              <td>49</td>
+              <td>27</td>
+              <td>446</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pw" title="country code: PW"></span></td>
+              <td>Palau</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ps" title="country code: PS"></span></td>
+              <td>Palestine, State of</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pa" title="country code: PA"></span></td>
+              <td>Panama</td>
+              <td>24</td>
+              <td>15</td>
+              <td>586</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pg" title="country code: PG"></span></td>
+              <td>Papua New Guinea</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-py" title="country code: PY"></span></td>
+              <td>Paraguay</td>
+              <td>51</td>
+              <td>63</td>
+              <td>990</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pe" title="country code: PE"></span></td>
+              <td>Peru</td>
+              <td>107</td>
+              <td>122</td>
+              <td>2905</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ph" title="country code: PH"></span></td>
+              <td>Philippines</td>
+              <td>42</td>
+              <td>52</td>
+              <td>669</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pn" title="country code: PN"></span></td>
+              <td>Pitcairn</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pl" title="country code: PL"></span></td>
+              <td>Poland</td>
+              <td>293</td>
+              <td>263</td>
+              <td>8088</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pt" title="country code: PT"></span></td>
+              <td>Portugal</td>
+              <td>170</td>
+              <td>329</td>
+              <td>9554</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pr" title="country code: PR"></span></td>
+              <td>Puerto Rico</td>
+              <td>32</td>
+              <td>21</td>
+              <td>178</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-qa" title="country code: QA"></span></td>
+              <td>Qatar</td>
+              <td>35</td>
+              <td>94</td>
+              <td>3213</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-re" title="country code: RE"></span></td>
+              <td>Réunion</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ro" title="country code: RO"></span></td>
+              <td>Romania</td>
+              <td>359</td>
+              <td>360</td>
+              <td>10752</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ru" title="country code: RU"></span></td>
+              <td>Russian Federation</td>
+              <td>589</td>
+              <td>282</td>
+              <td>8534</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-rw" title="country code: RW"></span></td>
+              <td>Rwanda</td>
+              <td>20</td>
+              <td>16</td>
+              <td>489</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-bl" title="country code: BL"></span></td>
+              <td>Saint Barthélemy</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sh" title="country code: SH"></span></td>
+              <td>Saint Helena, Ascension and Tristan da Cunha</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-kn" title="country code: KN"></span></td>
+              <td>Saint Kitts and Nevis</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lc" title="country code: LC"></span></td>
+              <td>Saint Lucia</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-mf" title="country code: MF"></span></td>
+              <td>Saint Martin (French part)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-pm" title="country code: PM"></span></td>
+              <td>Saint Pierre and Miquelon</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-vc" title="country code: VC"></span></td>
+              <td>Saint Vincent and the Grenadines</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ws" title="country code: WS"></span></td>
+              <td>Samoa</td>
+              <td>1</td>
+              <td>1</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sm" title="country code: SM"></span></td>
+              <td>San Marino</td>
+              <td>5</td>
+              <td>28</td>
+              <td>1048</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-st" title="country code: ST"></span></td>
+              <td>Sao Tome and Principe</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sa" title="country code: SA"></span></td>
+              <td>Saudi Arabia</td>
+              <td>16</td>
+              <td>3</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sn" title="country code: SN"></span></td>
+              <td>Senegal</td>
+              <td>23</td>
+              <td>15</td>
+              <td>405</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-rs" title="country code: RS"></span></td>
+              <td>Serbia</td>
+              <td>226</td>
+              <td>185</td>
+              <td>5184</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sc" title="country code: SC"></span></td>
+              <td>Seychelles</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sl" title="country code: SL"></span></td>
+              <td>Sierra Leone</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sg" title="country code: SG"></span></td>
+              <td>Singapore</td>
+              <td>13</td>
+              <td>33</td>
+              <td>1066</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sx" title="country code: SX"></span></td>
+              <td>Sint Maarten (Dutch part)</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sk" title="country code: SK"></span></td>
+              <td>Slovakia</td>
+              <td>192</td>
+              <td>186</td>
+              <td>5125</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-si" title="country code: SI"></span></td>
+              <td>Slovenia</td>
+              <td>138</td>
+              <td>108</td>
+              <td>3042</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sb" title="country code: SB"></span></td>
+              <td>Solomon Islands</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-so" title="country code: SO"></span></td>
+              <td>Somalia</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-za" title="country code: ZA"></span></td>
+              <td>South Africa</td>
+              <td>337</td>
+              <td>133</td>
+              <td>2943</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gs" title="country code: GS"></span></td>
+              <td>South Georgia and the South Sandwich Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ss" title="country code: SS"></span></td>
+              <td>South Sudan</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-es" title="country code: ES"></span></td>
+              <td>Spain</td>
+              <td>1097</td>
+              <td>1081</td>
+              <td>34060</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-lk" title="country code: LK"></span></td>
+              <td>Sri Lanka</td>
+              <td>19</td>
+              <td>25</td>
+              <td>501</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sd" title="country code: SD"></span></td>
+              <td>Sudan</td>
+              <td>17</td>
+              <td>7</td>
+              <td>184</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sr" title="country code: SR"></span></td>
+              <td>Suriname</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sj" title="country code: SJ"></span></td>
+              <td>Svalbard and Jan Mayen</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-se" title="country code: SE"></span></td>
+              <td>Sweden</td>
+              <td>376</td>
+              <td>267</td>
+              <td>6461</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ch" title="country code: CH"></span></td>
+              <td>Switzerland</td>
+              <td>254</td>
+              <td>281</td>
+              <td>7747</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-sy" title="country code: SY"></span></td>
+              <td>Syrian Arab Republic</td>
+              <td>19</td>
+              <td>6</td>
+              <td>130</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tw" title="country code: TW"></span></td>
+              <td>Taiwan, Province of China</td>
+              <td>71</td>
+              <td>7</td>
+              <td>126</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tj" title="country code: TJ"></span></td>
+              <td>Tajikistan</td>
+              <td>7</td>
+              <td>1</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tz" title="country code: TZ"></span></td>
+              <td>Tanzania, United Republic of</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-th" title="country code: TH"></span></td>
+              <td>Thailand</td>
+              <td>125</td>
+              <td>188</td>
+              <td>5589</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tl" title="country code: TL"></span></td>
+              <td>Timor-Leste</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tg" title="country code: TG"></span></td>
+              <td>Togo</td>
+              <td>21</td>
+              <td>4</td>
+              <td>122</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tk" title="country code: TK"></span></td>
+              <td>Tokelau</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-to" title="country code: TO"></span></td>
+              <td>Tonga</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tt" title="country code: TT"></span></td>
+              <td>Trinidad and Tobago</td>
+              <td>7</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tn" title="country code: TN"></span></td>
+              <td>Tunisia</td>
+              <td>71</td>
+              <td>377</td>
+              <td>11410</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tr" title="country code: TR"></span></td>
+              <td>Turkey</td>
+              <td>174</td>
+              <td>591</td>
+              <td>18463</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tm" title="country code: TM"></span></td>
+              <td>Turkmenistan</td>
+              <td>8</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tc" title="country code: TC"></span></td>
+              <td>Turks and Caicos Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-tv" title="country code: TV"></span></td>
+              <td>Tuvalu</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ug" title="country code: UG"></span></td>
+              <td>Uganda</td>
+              <td>12</td>
+              <td>12</td>
+              <td>370</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ua" title="country code: UA"></span></td>
+              <td>Ukraine</td>
+              <td>217</td>
+              <td>123</td>
+              <td>3170</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ae" title="country code: AE"></span></td>
+              <td>United Arab Emirates</td>
+              <td>11</td>
+              <td>41</td>
+              <td>1482</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-gb" title="country code: GB"></span></td>
+              <td>United Kingdom</td>
+              <td>655</td>
+              <td>713</td>
+              <td>25971</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-us" title="country code: US"></span></td>
+              <td>United States</td>
+              <td>2330</td>
+              <td>2356</td>
+              <td>79807</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-um" title="country code: UM"></span></td>
+              <td>United States Minor Outlying Islands</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-uy" title="country code: UY"></span></td>
+              <td>Uruguay</td>
+              <td>65</td>
+              <td>92</td>
+              <td>2130</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-uz" title="country code: UZ"></span></td>
+              <td>Uzbekistan</td>
+              <td>146</td>
+              <td>186</td>
+              <td>6040</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-vu" title="country code: VU"></span></td>
+              <td>Vanuatu</td>
+              <td>3</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ve" title="country code: VE"></span></td>
+              <td>Venezuela, Bolivarian Republic of</td>
+              <td>151</td>
+              <td>128</td>
+              <td>2931</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-vn" title="country code: VN"></span></td>
+              <td>Viet Nam</td>
+              <td>31</td>
+              <td>52</td>
+              <td>1614</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-vg" title="country code: VG"></span></td>
+              <td>Virgin Islands, British</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-vi" title="country code: VI"></span></td>
+              <td>Virgin Islands, U.S.</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-wf" title="country code: WF"></span></td>
+              <td>Wallis and Futuna</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-eh" title="country code: EH"></span></td>
+              <td>Western Sahara</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-ye" title="country code: YE"></span></td>
+              <td>Yemen</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-zm" title="country code: ZM"></span></td>
+              <td>Zambia</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><span class="fi fi-zw" title="country code: ZW"></span></td>
+              <td>Zimbabwe</td>
+              <td>49</td>
+              <td>42</td>
+              <td>672</td>
+            </tr>
+            <tr>
+              <td>YUG</td>
+              <td>Yugoslavia</td>
+              <td>33</td>
+              <td>23</td>
+              <td>387</td>
+            </tr>
+            <tr>
+              <td>POC</td>
+              <td>Pacific Ocean Countries</td>
+              <td>0</td>
+              <td>1</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>CRB</td>
+              <td>Caribbean</td>
+              <td>0</td>
+              <td>2</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>SVU</td>
+              <td>Sovietic Union</td>
+              <td>2</td>
+              <td>3</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>NCA</td>
+              <td>[No Country Available]</td>
+              <td>17</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+
+    <footer class="container mt-5">
+        <div class="row">
+
+              <div class="col-12 col-md-12">
+                <h5>Trabalho realizado por:</h5>
+
+                <ul class="list-unstyled text-small">
+                  <li class="mb-1">Gonçalo Mealha nº 123391</li>
+                  <li class="mb-1">Jing Yu Huang nº 123432</li>
+                  <li class="mb-1">José Valério nº 112255</li>
+                  <li class="mb-1">Lara Monteiro nº 123430</li>
+                </ul>
+              </div>
+
+            <div class="col-12 col-md">
+              <p class="float-end"><a href="#">Back to top</a></p>
+              <p>Dezembro 2024</p>
+            </div>
+      </footer>
+  </div>
+
+<script>
+  $('#example').DataTable({
+    pageLength: 10,
+    lengthMenu: [10, 25, 50, 100, 150, { label: 'All', value: -1 }],
+    // lengthChange: true,
+    scroller: true,
+    columnDefs: [{ width: '50%', targets: 1 }],
+
+  });
+</script>
+</body>
+</html>

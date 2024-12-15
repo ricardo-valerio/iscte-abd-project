@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head><script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Pricing example · Bootstrap v5.3</title>
+
+  <link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/sc-2.4.3/sp-2.3.3/datatables.min.css" rel="stylesheet">
+  <!--
+  <script src="https://cdn.datatables.net/v/bs5/dt-2.1.8/sc-2.4.3/sp-2.3.3/datatables.min.js"></script>
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+.fi{
+  border: 1px solid #000;
+}
+</style>
+
+</head>
+<body>
+
+  <div class="container py-3">
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center">
+        <p class="mt-2 d-flex align-items-center link-body-emphasis text-decoration-none">
+          <img src="./imagens/iscte-logo.png" alt="Instituto Universitário de Lisboa" width="250">
+          <span class="fs-4">Ciência de Dados - Armazenamento para Big Data</span>
+        </p>
+
+
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav nav-pills">
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link" href="./alinea_1.html">Alínea 1)</a>
+          </li>
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link" href="./alinea_2.html">Alínea 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="me-3 py-2 nav-link active" aria-current="page" href="#">Alínea 3)</a>
+          </li>
+          <li class="nav-item">
+            <a class="py-2 nav-link" href="./alinea_4.html">Alínea 4)</a>
+          </li>
+        </nav>
+      </div>
+
+      <h3 class="text-body-emphasis text-center">Alínea 3)</h3>
+
+      <div class="accordion mb-5" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Goal:
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p class="fs-5 text-body-secondary">List of Top 10 left-handed players name with their % of winning games in Grand Slam games.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              SQL command:
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <pre><code class="language-sql">
+                SELECT A.Name,
+                       Wins,
+                       Losses,
+                       (Wins + Losses) AS TotalGames,
+                       ROUND((CAST(Wins AS DECIMAL) / (Wins + Losses) * 100), 2) AS WinRate
+                FROM
+                    (SELECT player.name AS Name, COUNT(*) AS Wins
+                     FROM player
+                     JOIN match ON player.id = match.winner_id
+                     JOIN tournament ON match.tournament_id = tournament.id
+                     WHERE player.forehand = 'Left-Handed'
+                     AND tournament.name IN ('Australian Open', 'Roland Garros', 'Wimbledon', 'US Open')
+                     GROUP BY player.name) AS A
+                JOIN
+                    (SELECT player.name AS Name, COUNT(*) AS Losses
+                     FROM player
+                     JOIN match ON player.id = match.loser_id
+                     JOIN tournament ON match.tournament_id = tournament.id
+                     WHERE player.forehand = 'Left-Handed'
+                     AND tournament.name IN ('Australian Open', 'Roland Garros', 'Wimbledon', 'US Open')
+                     GROUP BY player.name) AS B
+                ON A.Name = B.Name
+                HAVING TotalGames >= 100
+                ORDER BY WinRate DESC
+                LIMIT 10;
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <img src="./imagens/alinea_3.png" alt="gráfico da alínea 3)" width="100%">
+
+        <p class="mb-5"><b>NOTA:</b> Para complementar esta questão, fomos verificar para o total de vitórias de cada atleta, quantas foram de cada respectivo torneio que compõe o Grand Slam:</p>
+
+        <img src="./imagens/alinea_3_plus.png" alt="gráfico complementar da alínea 3)" width="100%">
+      </div>
+    </main>
+
+
+    <footer class="container mt-5">
+        <div class="row">
+
+              <div class="col-12 col-md-12">
+                <h5>Trabalho realizado por:</h5>
+
+                <ul class="list-unstyled text-small">
+                  <li class="mb-1">Gonçalo Mealha nº 123391</li>
+                  <li class="mb-1">Jing Yu Huang nº 123432</li>
+                  <li class="mb-1">José Valério nº 112255</li>
+                  <li class="mb-1">Lara Monteiro nº 123430</li>
+                </ul>
+              </div>
+
+            <div class="col-12 col-md">
+              <p class="float-end"><a href="#">Back to top</a></p>
+              <p>Dezembro 2024</p>
+            </div>
+      </footer>
+  </div>
+
+<script>
+  $('#example').DataTable({
+    pageLength: 10,
+    lengthMenu: [10, 25, 50, 100, 150, { label: 'All', value: -1 }],
+    // lengthChange: true,
+    scroller: true,
+    columnDefs: [{ width: '50%', targets: 1 }],
+
+  });
+</script>
+</body>
+</html>
