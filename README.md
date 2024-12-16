@@ -9,6 +9,7 @@
 |__/|_______/  \_______/   \___/   \_______/            /___,' \__,_|\__\__,_| \__/\___|_|\___|_| |_|\___\___|
 ```
 
+<br>
 
 ### Pasta Partilhada no Google Drive onde ao longo do Trabalho fomos adicionando os comandos desenvolvidos:
 [https://drive.google.com/drive/folders/1swJtGrPlTLi5ci7gGdq0PKTuiJ633fMi?usp=drive_link](https://drive.google.com/drive/folders/1swJtGrPlTLi5ci7gGdq0PKTuiJ633fMi?usp=drive_link)
