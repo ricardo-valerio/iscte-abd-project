@@ -26,7 +26,6 @@
 - Gonçalo Mealha nº 123391
 - Jing Yu Huang nº 123432
 - José Valério nº 112255
-- Lara Monteiro nº 123430
 
 <br>
 
